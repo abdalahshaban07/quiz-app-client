@@ -1,0 +1,24 @@
+<div *ngIf="dataSource" class="table-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> id </mat-header-cell>
+            <mat-cell *matCellDef="let quiz"> {{quiz._id}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+
+            <mat-cell *matCellDef="let quiz">
+                <a (click)="editBtn(quiz._id)" class=" btn-small blue waves-effect waves-light btn ">Edit</a>
+                <a (click)="deleteBtn(quiz._id)" class=" btn-small red waves-effect waves-light btn">Delete</a>
+                <a (click)="publish(quiz._id)" class=" btn-small teal  waves-effect waves-light btn">Publish</a>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+</div>
+
+<div id="wrapper" class="row" *ngIf="!dataSource">
+    <h3>No Quiz Found</h3>
+</div>

@@ -1,0 +1,108 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span>Quiz App</span>
+        <div class="example-button-row" (click)='backBtn()'>
+            <button mat-raised-button class="mat-elevation-z20" color="primary">Back</button>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-card *ngFor="let question of quizData">
+    <div class="row">
+        <form [formGroup]="quizForm" novalidate class="col s12">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input formControlName="question" [(ngModel)]="question.question" />
+                    <mat-error *ngIf="quizForm.controls.question.invalid && quizForm.controls.question.touched ">
+                        Question
+                        is required
+                    </mat-error>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s3">
+                    <input formControlName="possibleAnswer1" [(ngModel)]="question.possibleAnswer1" />
+                    <mat-error
+                        *ngIf="quizForm.controls.possibleAnswer1.invalid && quizForm.controls.possibleAnswer1.touched ">
+                        possibleAnswer
+                        is required
+                    </mat-error>
+                </div>
+                <div class="input-field col s3">
+                    <input formControlName="possibleAnswer2" [(ngModel)]="question.possibleAnswer2" />
+                    <mat-error
+                        *ngIf="quizForm.controls.possibleAnswer2.invalid && quizForm.controls.possibleAnswer2.touched ">
+                        possibleAnswer
+                        is required
+                    </mat-error>
+                </div>
+                <div class="input-field col s3">
+                    <input formControlName="possibleAnswer3" [(ngModel)]="question.possibleAnswer3" />
+                    <mat-error
+                        *ngIf="quizForm.controls.possibleAnswer3.invalid && quizForm.controls.possibleAnswer3.touched ">
+                        possibleAnswer
+                        is required
+                    </mat-error>
+                </div>
+                <div class="input-field col s3">
+                    <input formControlName="possibleAnswer4" [(ngModel)]="question.possibleAnswer4" />
+                    <mat-error
+                        *ngIf="quizForm.controls.possibleAnswer3.invalid && quizForm.controls.possibleAnswer3.touched ">
+                        possibleAnswer
+                        is required
+                    </mat-error>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input formControlName="correctAnswer" [(ngModel)]="question.correctAnswer" />
+                    <mat-error
+                        *ngIf="quizForm.controls.correctAnswer.invalid && quizForm.controls.correctAnswer.touched ">
+                        correctAnswer
+                        is required
+                    </mat-error>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input formControlName="explanation" [(ngModel)]="question.explanation" />
+                    <mat-error *ngIf="quizForm.controls.explanation.invalid && quizForm.controls.explanation.touched ">
+                        explanation
+                        is required
+                    </mat-error>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s3">
+                    <button (click)="editQuestion(question)" [disabled]="!quizForm.valid" mat-raised-button
+                        type="submit" color="accent">
+                        update
+                    </button>
+                </div>
+                <div class="col s3">
+                    <button (click)="deleteQuestion(question._id)" color='primary' [disabled]="!quizForm.valid"
+                        mat-raised-button type="submit">
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</mat-card>
+<div id='wrapper' class="row">
+    <div class="col s3">
+        <button (click)="backBtn()" color='primary' mat-raised-button type="submit">
+            Save Change
+        </button>
+    </div>
+    <!-- [disabled]="!quizForm.valid" -->
+    <div class="col s8">
+        <mat-paginator pageIndex="0" #paginator [disabled]="!quizForm.valid" [length]="resultLength"
+            [showFirstLastButtons]="true" [pageSize]="1">
+        </mat-paginator>
+    </div>
+</div>
+
+<div id="wrapper" class="row" *ngIf="!quizData">
+    <h3>No Question For this quiz </h3>
+</div>

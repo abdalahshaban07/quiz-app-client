@@ -1,0 +1,45 @@
+.menu-bar {
+  position: absolute;
+  right: 60px;
+  color: rgb(255, 255, 255);
+}
+.table-container {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  // max-height: 500px;
+  widows: 100%;
+  min-width: 300px;
+  position: relative;
+}
+.loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mat-table {
+  overflow: auto;
+  max-height: 360px;
+}
+
+mat-form-field {
+  justify-content: center;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+mat-toolbar {
+  margin-top: 30px;
+}
+
+#wrapper {
+  text-align: center;
+  margin-top: 7px;
+}

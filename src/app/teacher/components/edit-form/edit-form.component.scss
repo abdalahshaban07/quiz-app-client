@@ -1,0 +1,18 @@
+.example-button-row {
+  position: absolute;
+  right: 60px;
+}
+#wrapper {
+  text-align: center;
+  margin-top: 7px;
+}
+
+mat-card {
+  justify-content: center;
+  width: 90%;
+  margin-right: auto;
+  margin-left: auto;
+  //   overflow-x: scroll;
+  margin-top: 7px;
+  max-height: auto;
+}
