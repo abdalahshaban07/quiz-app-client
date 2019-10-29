@@ -3,7 +3,6 @@ import { TeacherService } from './../../services/teacher.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Quiz } from './../../models/quiz';
 import { Component, OnInit } from '@angular/core';
-import io from 'socket.io-client'
 
 @Component({
   selector: 'app-all-quize',
@@ -13,20 +12,15 @@ import io from 'socket.io-client'
 export class AllQuizeComponent implements OnInit {
   displayedColumns = ['id', 'action']
   dataSource: Quiz[] = []
-  socket: any;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
     private teacherSer: TeacherService,
     private tokenServ: TokenserviceService
-  ) { this.socket = io('http://localhost:3000') }
+  ) { }
 
   ngOnInit() {
     this.getAllQuiz()
-    this.socket.on('refreshPage', () => {
-      this.getAllQuiz()
-    })
-
   }
 
 
@@ -62,7 +56,7 @@ export class AllQuizeComponent implements OnInit {
 
   publish(id) {
     this.teacherSer.publishQuiz(id).subscribe(data => {
-      this.socket.emit('refresh', {})
+      this.getAllQuiz()
     }, err => {
       this.teacherSer.errorHandler('can not publish this item')
     })

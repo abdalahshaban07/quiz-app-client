@@ -3,7 +3,6 @@ import { TokenserviceService } from './../../services/tokenservice.service';
 import { Router } from '@angular/router';
 import { AuthService } from './../../services/authservice.service';
 import { Component, OnInit } from '@angular/core';
-import io from 'socket.io-client'
 
 @Component({
   selector: 'app-signup',
@@ -15,10 +14,9 @@ export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   errorMessage: string;
   showSpinner: Boolean = false;
-  socket: any
 
   constructor(private authoService: AuthService, private fb: FormBuilder,
-    private router: Router, private tokenService: TokenserviceService) { this.socket = io('http://localhost:3000') }
+    private router: Router, private tokenService: TokenserviceService) { }
 
   ngOnInit() {
     this.init()
@@ -37,7 +35,6 @@ export class SignupComponent implements OnInit {
     this.authoService.registerUser(this.signupForm.value).subscribe(data => {
       // console.log(data);
       this.tokenService.SetToken(data['token'])
-      this.socket.emit('refresh', {})
       // console.log(data)
       this.signupForm.reset()
       setTimeout(() => {
