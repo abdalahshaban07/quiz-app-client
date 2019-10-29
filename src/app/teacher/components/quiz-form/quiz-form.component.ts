@@ -17,6 +17,8 @@ export class QuizFormComponent implements OnInit {
   possiblenswer: any
   quizData: []
   totalQuestion: number
+  id: any
+  addAnthor: boolean
   constructor(private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
@@ -25,6 +27,7 @@ export class QuizFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.setQuizToForm()
     this.init()
   }
 
@@ -41,20 +44,36 @@ export class QuizFormComponent implements OnInit {
   }
 
   saveForm() {
-    //create Quiz
-    let check = this.teacherServ.checkIfCorrectAnswerInPossible(this.quizForm.value)
-    if (check) {
-      this.questions = [...this.questions, this.quizForm.value]
-      this.teacherServ.createQuiz(this.questions).subscribe(data => {
-        this.router.navigate(['../'], { relativeTo: this.route })
-        this.teacherServ.successHandle('Quiz Created')
-      }, err => {
-        return this.errorHandler('can not save this quiz')
-      })
+    //add anthor question to quiz
+    if (this.addAnthor) {
+      let check = this.teacherServ.checkIfCorrectAnswerInPossible(this.quizForm.value)
+      if (check) {
+        this.questions = [...this.questions, this.quizForm.value]
+        this.teacherServ.addAnthorQuestionToQuiz(this.questions, this.id).subscribe(data => {
+          this.router.navigate(['teacher'])
+          this.teacherServ.successHandle('Question Added')
+        })
+      } else {
+        return this.errorHandler('Correct Answer must in Possible Answer')
+      }
     }
     else {
-      return this.errorHandler('Correct Answer must in Possible Answer')
+      //create Quiz
+      let check = this.teacherServ.checkIfCorrectAnswerInPossible(this.quizForm.value)
+      if (check) {
+        this.questions = [...this.questions, this.quizForm.value]
+        this.teacherServ.createQuiz(this.questions).subscribe(data => {
+          this.router.navigate(['teacher'])
+          this.teacherServ.successHandle('Quiz Created')
+        }, err => {
+          return this.errorHandler('can not save this quiz')
+        })
+      }
+      else {
+        return this.errorHandler('Correct Answer must in Possible Answer')
+      }
     }
+
   }
 
   anthorQuestion() {
@@ -69,12 +88,24 @@ export class QuizFormComponent implements OnInit {
   }
 
   backBtn() {
-    this.router.navigate(['../'], { relativeTo: this.route })
+    this.router.navigate(['../../'], { relativeTo: this.route })
   }
 
   errorHandler(message) {
     this.snackBar.open(message, 'Error', {
       duration: 2000
+    })
+  }
+
+  setQuizToForm() {
+    this.route.params.subscribe(params => {
+      this.id = params['id']
+      if (!this.id) {
+        return
+      }
+      else {
+        this.addAnthor = true
+      }
     })
   }
 

@@ -100,7 +100,7 @@ export class EditFormComponent implements OnInit {
   }
 
   backBtn() {
-    this.router.navigate(['../'], { relativeTo: this.route })
+    this.router.navigate(['../../'], { relativeTo: this.route })
   }
 
 

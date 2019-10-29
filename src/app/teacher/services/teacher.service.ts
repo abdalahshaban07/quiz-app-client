@@ -73,4 +73,8 @@ export class TeacherService {
   getPublishQuiz(): Observable<any> {
     return this.http.get<any>(`${BASE_URL}/get-publish`)
   }
+
+  addAnthorQuestionToQuiz(body, id): Observable<any> {
+    return this.http.post<any>(`${BASE_URL}/add-question/${id}`, body)
+  }
 }

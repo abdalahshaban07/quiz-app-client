@@ -8,6 +8,7 @@
             <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
 
             <mat-cell *matCellDef="let quiz">
+                <a (click)="addAnthor(quiz._id)" class=" btn-small blue waves-effect waves-light btn ">Add Question</a>
                 <a (click)="editBtn(quiz._id)" class=" btn-small blue waves-effect waves-light btn ">Edit</a>
                 <a (click)="deleteBtn(quiz._id)" class=" btn-small red waves-effect waves-light btn">Delete</a>
                 <a (click)="publish(quiz._id)" class=" btn-small teal  waves-effect waves-light btn">Publish</a>

@@ -42,7 +42,10 @@ export class AllQuizeComponent implements OnInit {
 
 
   editBtn(id) {
-    this.router.navigate([id], { relativeTo: this.route })
+    this.router.navigate(['edit', id], { relativeTo: this.route })
+  }
+  addAnthor(id) {
+    this.router.navigate(['new', id], { relativeTo: this.route })
   }
 
   deleteBtn(id) {

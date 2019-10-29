@@ -14,12 +14,12 @@ export class ToolbarComponent implements OnInit {
   ngOnInit() {
     const token = this.tokenService.GetToken()
     if (!token) {
-      this.router.navigate([''])
+      this.router.navigate(['/'])
     }
   }
 
   saveBtn() {
-    this.router.navigate(['new'], { relativeTo: this.route })
+    this.router.navigate(['new', 'quiz'], { relativeTo: this.route })
   }
   logout() {
     this.tokenService.DeleteToken()

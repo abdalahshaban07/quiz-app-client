@@ -13,13 +13,18 @@ const routes: Routes = [
     canActivate: [UserGuard]
   },
   {
-    path: 'new',
+    path: 'new/quiz',
     component: QuizFormComponent,
     canActivate: [UserGuard]
   },
   {
-    path: ':id',
+    path: 'edit/:id',
     component: EditFormComponent,
+    canActivate: [UserGuard]
+  },
+  {
+    path: 'new/:id',
+    component: QuizFormComponent,
     canActivate: [UserGuard]
   }
 ];
