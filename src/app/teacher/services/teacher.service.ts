@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { Quiz } from './../models/quiz';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-// const BASE_URL = `http://localhost:3000/quiz-app`
-const BASE_URL = `quiz-app`
+const BASE_URL = `http://localhost:3000/quiz-app`
+// const BASE_URL = `quiz-app`
 
 @Injectable({
   providedIn: 'root'
